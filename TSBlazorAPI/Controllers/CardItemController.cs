@@ -35,6 +35,9 @@ namespace TSBlazorAPI.Controllers
         [HttpGet]
         public List<CardItemModel> Get()
         {
+            //This makes it so we can use the token pass in from the header of an
+            //HttpRequestMessage to get the userId. This also help make sure that user only
+            //get the items that is their's.
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             CardItemData data = new CardItemData(_config);
             return data.GetCardItem(userId);

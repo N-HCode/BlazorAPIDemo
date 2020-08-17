@@ -40,7 +40,6 @@ namespace TSBlazorAPI
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-
             //establish validation/password requirements
             //Identity user has some efault validations. This is to override them
             services.Configure<IdentityOptions>(options =>
@@ -77,8 +76,13 @@ namespace TSBlazorAPI
                     jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
+                        //Below is for the Token controller from another tutorial
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
                             .GetBytes("MySecretKeyIsSceretSoDoNotTell")),
+                        ////This is for the User Controll Login
+                        //IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                        //    .GetBytes(jwtSection.Get<JWTSettingsModel>().SecretKey)),
+
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         ValidateLifetime = true,

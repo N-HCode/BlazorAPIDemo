@@ -94,10 +94,12 @@ namespace TSBlazorAPI.Controllers
                         .ToUnixTimeSeconds().ToString())
                 };
 
+            //StringBuilder sb = new StringBuilder();
+            List<string> userRoles = new List<string>();
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role.Name));
-
+                userRoles.Add(role.Name);
             }
 
             var token = new JwtSecurityToken(
@@ -118,6 +120,7 @@ namespace TSBlazorAPI.Controllers
             var output = new
             {
                 Access_Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Roles = userRoles
             };
 
             return output;
